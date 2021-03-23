@@ -1,5 +1,5 @@
-
-const BlogList = ({ blogs, title }) => {
+// A7. Pass in the handleDelete prop
+const BlogList = ({ blogs, title, handleDelete }) => {
     // const blogs = props.blogs;
     // const title = props.title;
 
@@ -17,6 +17,8 @@ const BlogList = ({ blogs, title }) => {
                 <div className="blog-preview" key={blog.id} >
                     <h2>{ blog.title }</h2>
                     <p>Written by { blog.author }</p>
+                    {/* A1 Create the button, create the onClick event with the two-level AF because we need to pass in an argument - blog.id (A2 is in Home) */}
+                    <button className="deleteBlog" onClick={() => handleDelete(blog.id)}>Delete blog</button>
                 </div>
             ))}    
             
