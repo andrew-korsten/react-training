@@ -8,11 +8,8 @@ import BlogList from "./BlogList";
 import Test from "./Test";
 
 const Home = () => {
-    const [blogs, setBlogs] = useState([
-        { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
-        { title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2 },
-        { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
-    ])
+    // D3. Set the initial value of blogs to null
+    const [blogs, setBlogs] = useState(null);
 
     const [name, setName] = useState('mario');
 
@@ -25,26 +22,29 @@ const Home = () => {
         setBlogs(newBlogs);
     }
 
-    const handleName = (name) => {
-        setName('luigi');
-    }
-
+    // D1. Create the useEffect Hook, 
+    // D2. Make sure that the empty array is used as the dependency in order to avoid the continuous loop
     useEffect(() => {
-        console.log('useEffect ran');
-        console.log(blogs);
-    }, [blogs, name])
+               // D4. Fetch GET ALL from the endpoint
+               fetch('http://localhost:8000/blogs')
+               // D5. Get the res via the then + pass the json into the js object, and return it
+               .then(res => {
+                   return res.json();
+               })
+               // D6. Then the data 
+               .then(data => {
+                   // D7. update the blogs with data
+                   setBlogs(data);
+               }) 
+    }, [])
+    
 
+    
     return (
         <div className="home">
             {/* A6. Pass the props for the handleDelete funct */}
-            <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />
-            {blogs.filter((blog) => blog.author === 'mario').map((blog) => (
-                <div className="blog-preview" key = {blog.id}>
-                    <h3>{ blog.title }</h3>
-                    <h3>{ blog.author }</h3>
-                    <h3>{ blog.body }</h3>
-                </div>
-            ))}
+            {/* D8. Create the simplified terniary operator (&&) for the avaiablity of the blogs */}
+            {blogs && <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />}
             <Test />
         </div>
     );
