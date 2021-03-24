@@ -13,15 +13,6 @@ const Home = () => {
 
     const [name, setName] = useState('mario');
 
-    /* A2. Create the handleDelete funct here because we want to work with the State directly, as opposed to working with its prop in BlogList */
-    // A3. Pass in the "id" as this funct will be used in BlogList where the arg will be "blog.id"
-    const handleDelete = (id) => {
-        // A4. Filter out any deleted blogs by anti-matching them
-        const newBlogs = blogs.filter((blog) => blog.id != id);
-        // A5. replace the old data with the new data in the blogs
-        setBlogs(newBlogs);
-    }
-
     // D1. Create the useEffect Hook, 
     // D2. Make sure that the empty array is used as the dependency in order to avoid the continuous loop
     useEffect(() => {
@@ -42,9 +33,8 @@ const Home = () => {
     
     return (
         <div className="home">
-            {/* A6. Pass the props for the handleDelete funct */}
             {/* D8. Create the simplified terniary operator (&&) for the avaiablity of the blogs */}
-            {blogs && <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />}
+            {blogs && <BlogList blogs={blogs} title="All Blogs" />}
             <Test />
         </div>
     );
