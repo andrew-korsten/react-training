@@ -1,3 +1,5 @@
+// G1. Create useFetch file. The CH file/funct should always start with useAction.
+
 // C1. Create the data folder, db.json file
 // C2. Copy the data from gh
 // C3. Open the second console and run "npx json-server --watch data/db.json --port 8000" (we need to specify the port 8000 since the dev process already runs on port 3000)
