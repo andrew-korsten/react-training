@@ -1,7 +1,7 @@
+import { Link } from "react-router-dom";
+
 // A7. Pass in the handleDelete prop
 const BlogList = ({ blogs, title, handleDelete }) => {
-    // const blogs = props.blogs;
-    // const title = props.title;
 
 
     // B2. specify the name as the param
@@ -15,8 +15,11 @@ const BlogList = ({ blogs, title, handleDelete }) => {
             <h1>{ title }</h1>
             {blogs.map(blog => (
                 <div className="blog-preview" key={blog.id} >
-                    <h2>{ blog.title }</h2>
-                    <p>Written by { blog.author }</p>
+                    {/* K5. AI the Link and wrap the preview into it. the path is literal string + blog.id passed into with ${} + check on Home that the user is routed to the correctly nubmered url */}
+                    <Link to={`blogs/${blog.id}`}> 
+                        <h2>{ blog.title }</h2>
+                        <p>Written by { blog.author }</p>
+                    </Link>
                 </div>
             ))}    
             
